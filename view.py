@@ -47,9 +47,6 @@ input_file_path = '/home/dev/exp/test\paths.txt'
 # エージェントの経路を読み込む
 parsed_states = load_agent_states_from_file(input_file_path)
 
-# 画像を保存するためのフォルダを指定
-output_folder = "out1/"
-
 # 最大のステップ数を決定
 max_steps = max(len(states) for states in parsed_states)
 
@@ -77,7 +74,10 @@ for idx in range(max_steps):
             }[direction]
             cv2.arrowedLine(image, center, arrow_end, (255, 255, 0), 5)
 
-    # 画像を保存
-    output_path = f"{output_folder}step_{idx:03d}.png"
-    cv2.imwrite(output_path, image)
+    # 画像を表示
+    cv2.imshow("MAPD Sim", image)
+    cv2.waitKey(500)  # 500ミリ秒待つ
+
+    # 画像ウィンドウを閉じる
+cv2.destroyAllWindows()
 
