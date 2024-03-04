@@ -23,7 +23,7 @@ colors = {
     '.': (255, 255, 255)   # 白
 }
 
-# マップを画像に変換し、枠線を描画する関数
+# マップを画像に変換し、枠線とインデックスを描画する関数
 def draw_map_with_grid(image):
     tile_size = 100  # タイルのサイズ
     for y, row in enumerate(map_data):
@@ -33,6 +33,11 @@ def draw_map_with_grid(image):
             bottom_right = ((x + 1) * tile_size, (y + 1) * tile_size)
             cv2.rectangle(image, top_left, bottom_right, color, -1)  # セルを塗りつぶし
             cv2.rectangle(image, top_left, bottom_right, (0, 0, 0), 1)  # 枠線を描画
+
+            # セルの中央に一次元インデックスを描画
+            index = y * width + x
+            center = (int((top_left[0] + bottom_right[0]) / 2), int((top_left[1] + bottom_right[1]) / 2))
+            cv2.putText(image, str(index), center, cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 0, 0), 1)
 
 # ファイルからエージェントの経路を読み込む関数
 def load_agent_states_from_file(file_path):
