@@ -35,7 +35,7 @@ def draw_map_with_grid(image):
             cv2.rectangle(image, top_left, bottom_right, (0, 0, 0), 1)  # 枠線を描画
 
             # セルの中央に一次元インデックスを描画
-            index = y * width + x
+            index = y * width + x - 1
             center = (int((top_left[0] + bottom_right[0]) / 2), int((top_left[1] + bottom_right[1]) / 2))
             cv2.putText(image, str(index), center, cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 0, 0), 1)
 
